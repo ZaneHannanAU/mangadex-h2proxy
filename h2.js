@@ -16,6 +16,7 @@ const getConnection = url => {
 
 	let connection = h2.connect(h.origin)
 	connections.set(h.hostname, connection)
+	connection.on('close', connecion.unref)
 	connection.on(
 		'close',
 		connections.delete.bind(connections, h.hostname)
